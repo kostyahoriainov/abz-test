@@ -1,6 +1,7 @@
 import React from 'react'
+import _orderBy from 'lodash/orderBy'
+import PropTypes from 'prop-types';
 import UserItem from './UserItem';
-import PropTypes from 'prop-types'
 
 class Users extends React.Component {
 
@@ -8,9 +9,11 @@ class Users extends React.Component {
         this.props.fetchUsers()
     }
 
+    sortUsers = (users) => _orderBy(users, 'registration_timestamp', 'asc')
+
     render() {
         const { users } = this.props
-
+        const sortedUsers = this.sortUsers(users.users)
         return (
             <section className="users" id="users">
             <div className="container">
@@ -31,7 +34,7 @@ class Users extends React.Component {
                     <div className="row">
                         
                         {
-                            users.users.map(user => <UserItem key={user.id} user={user}/> )
+                            sortedUsers.map(user => <UserItem key={user.id} user={user}/> )
                         }
 
                         
@@ -56,7 +59,8 @@ class Users extends React.Component {
 
 Users.propTypes = {
     users: PropTypes.object,
-    loadMoreUsers: PropTypes.func.isRequired
+    loadMoreUsers: PropTypes.func.isRequired,
+    fetchUsers: PropTypes.func.isRequired
 }
 
 Users.defaultProps = {

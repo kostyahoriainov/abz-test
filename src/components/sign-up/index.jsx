@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 class SignUp extends React.Component {
 
@@ -17,7 +18,7 @@ class SignUp extends React.Component {
     handleChange = ({target}) => {
         this.setState(() => ({
             ...this.state,
-            [target.name]: target.value
+            [target.id]: target.value
         }))
     }
 
@@ -45,7 +46,7 @@ class SignUp extends React.Component {
                                 <label>
                                     Name
                                 </label>
-                                <input type="text" name="name" placeholder="Your name" onChange={this.handleChange}/>
+                                <input type="text" id="name" placeholder="Your name" onChange={this.handleChange}/>
                             </div>
                         </div>
     
@@ -54,22 +55,22 @@ class SignUp extends React.Component {
                                 <label>
                                     Email
                                 </label>
-                                <input type="text" name="email" placeholder="Your email" onChange={this.handleChange} />
+                                <input type="text" id="email" placeholder="Your email" onChange={this.handleChange} />
                             </div>
                         </div>
     
                         <div className="col-md-4">
                             <div className="sign-up__input">
-                                <label>
+                                <label htmlFor="phone">
                                     Phone
                                 </label>
-                                <input type="text" name="phone" placeholder="+38 (___) ___ __ __" onChange={this.handleChange} />
+                                <input type="text" id="phone" placeholder="+38 (___) ___ __ __" onChange={this.handleChange} />
                             </div>
                         </div>
     
                         <div className="col-md-6">
                             <div className="sign-up__select">
-                                <select name="position" onChange={this.handleChange}>
+                                <select id="position" onChange={this.handleChange}>
                                     <option disabled> Choose a position </option>
                                     {
                                         positions.map(pos => <option value={pos.id} key={pos.name}>{pos.name}</option>)
@@ -80,7 +81,7 @@ class SignUp extends React.Component {
     
                         <div className="col-md-6">
                             <div className="sign-up__file">
-                                <input type="file" name="photo" onChange={this.handleChange} />
+                                <input type="file" id="photo" onChange={this.handleChange} />
                             </div>
                         </div>
     
@@ -99,6 +100,10 @@ class SignUp extends React.Component {
     
         )
     }
+}
+
+SignUp.propTypes = {
+    fetchPositions: PropTypes.func.isRequired
 }
 
 

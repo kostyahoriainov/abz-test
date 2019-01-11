@@ -43,12 +43,10 @@ export function loadMoreUsers() {
             type: C.LOAD_MORE_USERS_REQUEST
         })
         return axios.get(getState().users.links.next_url)
-            .then(({data}) => {
-                console.log(getState().users.links.next_url)
-                dispatch({
+            .then(({data}) => dispatch({
                 type: C.LOAD_MORE_USERS_SUCCESS,
                 payload: data
-            })})
+            }))
             .catch(err => dispatch({
                 type: C.LOAD_MORE_USERS_FAILURE,
                 payload: err.message
