@@ -13,7 +13,9 @@ export default (state = defaultState, action) => {
         case C.FETCH_USERS_REQUEST:
             return {
                 ...state,
-                isLoading: true
+                isLoading: true,
+                getToken: action.getToken,
+                token: action.token
             }
         case C.FETCH_USERS_SUCCESS:
             return {

@@ -24,11 +24,12 @@ export function fetchUsers() {
     return function(dispatch, getState) {
         dispatch({
             type: C.FETCH_USERS_REQUEST,
+            getToken: true
         })
         return axios.get(getState().users.links.next_url || 'https://frontend-test-assignment-api.abz.agency/api/v1/users?page=1&count=6')
             .then(({data}) => dispatch({
                 type: C.FETCH_USERS_SUCCESS,
-                payload: data
+                payload: data,
             }))
             .catch(err => dispatch({
                 type: C.FETCH_HEADER_USER_FAILURE,

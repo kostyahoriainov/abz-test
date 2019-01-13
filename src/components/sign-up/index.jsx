@@ -20,20 +20,20 @@ class SignUp extends React.Component {
 
     validate = (data) => {
         const error = {};
-        if((!data.name)) {
-            error.name = "Error"
+        if((data.name.length < 2) || (data.name.length > 60)) {
+            error.name = "This field must be from 2 to 60 characters"
         } 
-        if((!data.email)) {
-            error.email = "Error"
+        if((data.email.length < 2) || (data.email.length > 100)) {
+            error.email = "This field must be from 2 to 100 characters"
         }
         if((!data.phone)) {
             error.phone = "Error"
         }
         if((!data.position)) {
-            error.position = "Error"
+            error.position = "Please, select a position from the list"
         }
         if((!data.photo)) {
-            error.photo = "Error"
+            error.photo = "Please, upload your photo"
         }
 
         return error
@@ -73,6 +73,7 @@ class SignUp extends React.Component {
 
     handleSumbit = e => {
         e.preventDefault()
+        console.log(e)
         const error = this.validate(this.state.data)
         this.setState({error})
     }
