@@ -20,10 +20,8 @@ class SignUp extends React.Component {
 
     validate = (data) => {
         const error = {};
-        if(data.name.length < 2) {
-            if(data.name.length > 4) {
-                error.name = "Error"
-            }
+        if((!data.name)) {
+            error.name = "Error"
         } 
         if((!data.email)) {
             error.email = "Error"
