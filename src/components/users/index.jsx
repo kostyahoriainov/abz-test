@@ -1,5 +1,5 @@
 import React from 'react'
-import _orderBy from 'lodash/orderBy'
+import _sortBy from 'lodash/sortBy'
 import PropTypes from 'prop-types';
 import UserItem from './UserItem';
 
@@ -9,10 +9,11 @@ class Users extends React.Component {
         this.props.fetchUsers()
     }
 
-    sortUsers = (users) => _orderBy(users, 'registration_timestamp', 'asc')
+    sortUsers = (users) => _sortBy(users, 'registration_timestamp', 'desc')
 
     render() {
         const { users } = this.props
+
         const sortedUsers = this.sortUsers(users.users)
         return (
             <section className="users" id="users">

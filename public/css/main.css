@@ -11,6 +11,10 @@ body {
   border-color: #d7d7d7 !important
 }
 
+.error {
+  color: red !important;
+}
+
 .header {
   width: 100%;
   position: fixed;
@@ -198,6 +202,7 @@ body {
   margin-bottom: 85px;
   font-size: 0;
 }
+
 .users__item-img {
   display: inline-block;
   vertical-align: top;
@@ -263,25 +268,77 @@ body {
   font-family: "Source Sans Pro", sans-serif;
   background-color: #fff;
 }
+.sign-up__input span {
+  position: absolute;
+  top: 55px;
+  left: 19px;
+  color: red;
+  font-size: 12px;
+  font-family: "Source Sans Pro", sans-serif;
+}
+.sign-up__file {
+  font-size: 0;
+  position: relative;
+}
+.sign-up__file p {
+  width: 77%;
+  display: inline-block;
+  margin: 0;
+  padding: 17px;
+  color: #959494;
+  font-size: 16px;
+  font-family: "Source Sans Pro", sans-serif;
+  border: 1px solid #959494;
+  border-right: none;
+  border-radius: 5px 0 0 5px;
+}
+.sign-up__file label {
+  display: inline-block;
+  padding: 16px 0;
+  width: 23%;
+  text-align: center;
+  color: #ef6c00;
+  font-size: 16px;
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: 700;
+  border: 2px solid #ef6c00;
+  border-radius: 0 5px 5px 0;
+}
+.sign-up__file input {
+  display: none;
+}
+.sign-up__file span {
+  position: absolute;
+  top: 57px;
+  left: 19px;
+  color: #959494;
+  font-size: 12px;
+  font-family: "Source Sans Pro", sans-serif;
+}
 .sign-up__select {
+  position: relative;
   border: 1px solid #959494;
   border-radius: 5px;
   margin-bottom: 40px;
 }
 .sign-up__select select {
   width: 100%;
-  padding: 17px;
+  padding: 16px;
   font-size: 16px;
   font-family: "Source Sans Pro", sans-serif;
   border: none;
   background: none;
 }
+.sign-up__select span {
+  position: absolute;
+  top: 57px;
+  left: 19px;
+  color: red;
+  font-size: 12px;
+  font-family: "Source Sans Pro", sans-serif;
+}
 .sign-up__select select option {
   font-size: 30px;
-  line-height: 140px;
-}
-.sign-up__file {
-  text-align: right;
 }
 .sign-up__submit {
   text-align: center;
@@ -617,7 +674,7 @@ body {
   .users__item-img {
     display: block;
   }
-  .users__item:nth-child(2n) {
+  .user:nth-child(2n) {
     display: none;
   }
 
