@@ -26,8 +26,8 @@ class SignUp extends React.Component {
         if((data.email.length < 2) || (data.email.length > 100)) {
             error.email = "This field must be from 2 to 100 characters"
         }
-        if((!data.phone)) {
-            error.phone = "Error"
+        if((!data.phone) || (data.phone.match(/[\+]{0,1}380([0-9]{9})/g) === null)) {
+            error.phone = 'This field was filled incorrectly'
         }
         if((!data.position)) {
             error.position = "Please, select a position from the list"
@@ -73,7 +73,6 @@ class SignUp extends React.Component {
 
     handleSumbit = e => {
         e.preventDefault()
-        console.log(e)
         const error = this.validate(this.state.data)
         this.setState({error})
     }
