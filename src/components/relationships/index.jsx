@@ -11,11 +11,9 @@ const Relationships = () =>
                             <h3>
                                 About my relationships with
                                 web-development
-                    </h3>
+                            </h3>
                         </div>
-
                     </div>
-
                 </div>
 
                 <div className="row">
@@ -28,19 +26,17 @@ const Relationships = () =>
                             <div className="relationships__title">
                                 <p>
                                     I'm in love with HTML
-                        </p>
+                                </p>
                             </div>
 
                             <div className="relationships__text">
                                 <p>
                                     Hypertext Markup Language (HTML) is the standard
                                     markup language for creating web pages and web applications.
-                        </p>
+                                </p>
                             </div>
 
                         </div>
-
-
                     </div>
 
                     <div className="col-lg-4">
@@ -52,7 +48,7 @@ const Relationships = () =>
                             <div className="relationships__title">
                                 <p>
                                     CSS is my best friend
-                        </p>
+                                </p>
                             </div>
 
                             <div className="relationships__text">
@@ -60,12 +56,9 @@ const Relationships = () =>
                                     Cascading Style Sheets (CSS) is a  style sheet language used for describing the presentation
                                     of a document written in a markup language
                                     like HTML.
-                        </p>
+                                </p>
                             </div>
-
                         </div>
-
-
                     </div>
 
                     <div className="col-lg-4">
@@ -77,7 +70,7 @@ const Relationships = () =>
                             <div className="relationships__title">
                                 <p>
                                     JavaScript is my passion
-                        </p>
+                                </p>
                             </div>
 
                             <div className="relationships__text">
@@ -85,20 +78,13 @@ const Relationships = () =>
                                     JavaScript is a high-level, interpreted programming language.
                                     It is a language which is also characterized as dynamic,
                                     weakly typed, prototype-based and multi-paradigm.
-                        </p>
+                                </p>
                             </div>
-
                         </div>
-
-
                     </div>
-
                 </div>
-
             </div>
-
         </div>
-
     </section>
 
 

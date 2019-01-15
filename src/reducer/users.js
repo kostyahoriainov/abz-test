@@ -20,7 +20,10 @@ export default (state = defaultState, action) => {
         case C.FETCH_USERS_SUCCESS:
             return {
                 ...state, 
-                users: payload.users,
+                users: [
+                    ...state.users,
+                    ...payload.users
+                ],
                 isLoading: false,
                 links: payload.links
             }
@@ -29,20 +32,6 @@ export default (state = defaultState, action) => {
                 ...state,
                 error: payload,
                 isLoading: false
-            }
-        case C.LOAD_MORE_USERS_SUCCESS: 
-            return {
-                ...state,
-                users: [
-                    ...state.users,
-                    ...payload.users
-                ],
-                links: payload.links
-            }
-        case C.LOAD_MORE_USERS_FAILURE:
-            return {
-                ...state,
-                error: payload
             }
         default:
             return state

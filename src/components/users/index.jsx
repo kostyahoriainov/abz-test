@@ -9,7 +9,7 @@ class Users extends React.Component {
         this.props.fetchUsers()
     }
 
-    sortUsers = (users) => _sortBy(users, 'registration_timestamp', 'desc')
+    sortUsers = (users) => _sortBy(users, 'registration_timestamp', 'asc')
 
     render() {
         const { users } = this.props
@@ -45,7 +45,7 @@ class Users extends React.Component {
                     <div className="row">
                         <div className="col">
                             <div className={`users__button btn-secondary ${users.links.next_url ? '' : 'disabled'}`}>
-                                <button onClick={() => this.props.loadMoreUsers()}>
+                                <button onClick={() =>  this.props.fetchUsers()}>
                                     Show more
                                 </button>
                             </div>
@@ -60,7 +60,6 @@ class Users extends React.Component {
 
 Users.propTypes = {
     users: PropTypes.object,
-    loadMoreUsers: PropTypes.func.isRequired,
     fetchUsers: PropTypes.func.isRequired
 }
 

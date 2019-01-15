@@ -32,28 +32,10 @@ export function fetchUsers() {
                 payload: data,
             }))
             .catch(err => dispatch({
-                type: C.FETCH_HEADER_USER_FAILURE,
+                type: C.FETCH_USERS_FAILURE,
                 payload: err.message
             }))
     }
-}
-
-export function loadMoreUsers() {
-    return function(dispatch, getState) {
-        dispatch({
-            type: C.LOAD_MORE_USERS_REQUEST
-        })
-        return axios.get(getState().users.links.next_url)
-            .then(({data}) => dispatch({
-                type: C.LOAD_MORE_USERS_SUCCESS,
-                payload: data
-            }))
-            .catch(err => dispatch({
-                type: C.LOAD_MORE_USERS_FAILURE,
-                payload: err.message
-            }))
-    }
-
 }
 
 export function fetchPositions () {
@@ -70,5 +52,20 @@ export function fetchPositions () {
                 type: C.FETCH_USERS_FAILURE,
                 payload: err.message
             }))
+    }
+}
+
+export function postUser (user) {
+    return function (dispatch, getState) {
+        dispatch({
+            type: C.POST_USER_REQUEST
+        })
+        const token = getState().users.token
+        axios.defaults.headers.common['Token'] = token;
+        return axios.post('https://frontend-test-assignment-api.abz.agency/api/v1/users', user)
+            .then(response => {
+                console.log(response)
+            })
+            .catch(err => console.log(err))
     }
 }

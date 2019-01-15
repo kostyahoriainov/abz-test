@@ -1,17 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-class SignUp extends React.Component {
-
-    state = {
+const DEFAULTSTATE = {
         data: {
             name: '',
             email: '',
             phone: '',
-            position: '',
+            position_id: '',
             photo: '',
         },
         error: {}
+}
+
+class SignUp extends React.Component {
+
+    state = {
+        ...DEFAULTSTATE
     }
 
     componentDidMount() {
@@ -26,11 +30,11 @@ class SignUp extends React.Component {
         if((data.email.length < 2) || (data.email.length > 100)) {
             error.email = "This field must be from 2 to 100 characters"
         }
-        if((!data.phone) || (data.phone.match(/[\+]{0,1}380([0-9]{9})/g) === null)) {
+        if((!data.phone) || (data.phone.match(/[+]{0,1}380([0-9]{9})/g) === null)) {
             error.phone = 'This field was filled incorrectly'
         }
-        if((!data.position)) {
-            error.position = "Please, select a position from the list"
+        if((!data.position_id)) {
+            error.position_id = "Please, select a position from the list"
         }
         if((!data.photo)) {
             error.photo = "Please, upload your photo"
@@ -62,7 +66,7 @@ class SignUp extends React.Component {
         this.setState(() => ({
             data: {
                 ...this.state.data,
-                [target.id]: target.value
+                [target.id]: target.id === 'position_id' ? parseInt(target.value, 10) : target.value
             },
             error: {
                 ...this.state.error,
@@ -75,6 +79,20 @@ class SignUp extends React.Component {
         e.preventDefault()
         const error = this.validate(this.state.data)
         this.setState({error})
+        if(Object.keys(error).length === 0) {
+
+            const newData = new FormData ();
+
+            newData.append('name', this.state.data.name);
+            newData.append('email', this.state.data.email);
+            newData.append('phone', this.state.data.phone);
+            newData.append('position_id', this.state.data.position_id);
+            newData.append('photo', this.img.files[0]);
+
+            //this.props.postUser(newData)
+            this.setState(DEFAULTSTATE)
+
+        }
     }
 
 
@@ -83,7 +101,10 @@ class SignUp extends React.Component {
         return(
             <section className="sign-up" id="signUp">
             <div className="container">
-                <form className="sign-up__block" encType="multipart/form-data" method="post" onSubmit={this.handleSumbit}>
+                <form className="sign-up__block" 
+                        encType="multipart/form-data" 
+                        method="post" 
+                        onSubmit={this.handleSumbit}>
                     <div className="row sign-up__header">
                         <div className="col title">
                             <h3>
@@ -102,10 +123,18 @@ class SignUp extends React.Component {
                                 <label htmlFor="name">
                                     Name
                                 </label>
-                                <input type="text" id="name" placeholder="Your name" onChange={this.handleChange}/>
+                                <input 
+                                        type="text" 
+                                        id="name" 
+                                        placeholder="Your name" 
+                                        value={this.state.data.name} 
+                                        onChange={this.handleChange}
+                                />
+
                                 {
                                     this.state.error.name ? <span>{this.state.error.name}</span> : ''
                                 }
+
                             </div>
                         </div>
     
@@ -114,10 +143,18 @@ class SignUp extends React.Component {
                                 <label htmlFor="email">
                                     Email
                                 </label>
-                                <input type="text" id="email" placeholder="Your email" onChange={this.handleChange} />
+                                <input 
+                                        type="text" 
+                                        id="email" 
+                                        placeholder="Your email" 
+                                        value={this.state.data.email} 
+                                        onChange={this.handleChange} 
+                                />
+
                                 {
                                     this.state.error.email ? <span>{this.state.error.email}</span> : ''
                                 }
+
                             </div>
                         </div>
     
@@ -126,7 +163,14 @@ class SignUp extends React.Component {
                                 <label htmlFor="phone">
                                     Phone
                                 </label>
-                                <input type="text" id="phone" placeholder="+38 (___) ___ __ __" onChange={this.handleChange} />
+                                <input 
+                                        type="text" 
+                                        id="phone" 
+                                        placeholder="+38 (___) ___ __ __" 
+                                        value={this.state.data.phone} 
+                                        onChange={this.handleChange} 
+                                />
+
                                 {
                                     this.state.error.phone ? <span>{this.state.error.phone}</span> : ''
                                 }
@@ -135,21 +179,33 @@ class SignUp extends React.Component {
     
                         <div className="col-md-6">
                             <div className="sign-up__select">
-                                <select id="position" onChange={this.handleChange}>
+                                <select 
+                                        id="position_id" 
+                                        value={this.state.data.position_id} 
+                                        onChange={this.handleChange}>
+
                                     <option disabled> Choose a position </option>
                                     {
                                         positions.map(pos => <option value={pos.id} key={pos.name}>{pos.name}</option>)
                                     }
                                 </select>
                                 {
-                                    this.state.error.position ? <span>{this.state.error.position}</span> : ''
+                                    this.state.error.position_id ? <span>{this.state.error.position_id}</span> : ''
                                 }
                             </div>
                         </div>
     
                         <div className="col-md-6">
                             <div className="sign-up__file">
-                                <input type="file" ref={img => {this.img = img}} data-max-size="5000000" id="photo" accept="image/jpg" onChange={this.handleChange} />
+                                <input 
+                                        type="file" 
+                                        ref={img => {this.img = img}} 
+                                        data-max-size="5000000" 
+                                        id="photo" 
+                                        accept="image/jpg" 
+                                        onChange={this.handleChange} 
+                                />
+
                                 {
                                    this.state.error.photo ? <p className='error'>{this.state.error.photo}</p> : <p>{this.state.data.photo || 'Upload your photo'}</p> 
                                 }
@@ -177,7 +233,12 @@ class SignUp extends React.Component {
 }
 
 SignUp.propTypes = {
+    positions: PropTypes.array,
     fetchPositions: PropTypes.func.isRequired
+}
+
+SignUp.defaultProps = {
+    positions: []
 }
 
 
