@@ -4,22 +4,20 @@ import { Link } from 'react-scroll';
 const AboutMe = () => 
 
     <section className="about-me" id='aboutMe'>
-        <div className="container">
+        <div className="container no-pad">
             <div className="about-me__block">
 
                 <div className="row align-items-center">
                     <div className="col">
-
                         <div className="about-me__header title">
                             <h3>
                                 Let's get ac quainted
                             </h3>
                         </div>
-
                     </div>
                 </div>
 
-                <div className="row align-items-center">
+                <div className="row">
                     <div className="col-md-4">
                         <div className="about-me__img">
                             <img src="./img/man-mobile.svg" alt="man-mobile" />

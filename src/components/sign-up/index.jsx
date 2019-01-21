@@ -89,8 +89,9 @@ class SignUp extends React.Component {
             newData.append('position_id', this.state.data.position_id);
             newData.append('photo', this.img.files[0]);
 
-            //this.props.postUser(newData)
+            this.props.postUser(newData);
             this.setState(DEFAULTSTATE)
+            this.props.toggleModal();
 
         }
     }
@@ -100,7 +101,7 @@ class SignUp extends React.Component {
         const { positions } = this.props
         return(
             <section className="sign-up" id="signUp">
-            <div className="container">
+            <div className="container no-pad">
                 <form className="sign-up__block" 
                         encType="multipart/form-data" 
                         method="post" 
@@ -218,7 +219,7 @@ class SignUp extends React.Component {
                     </div>
     
                     <div className="row sign-up__submit">
-                        <div className="col btn-primary disabled">
+                        <div className="col btn-primary">
                             <button >
                                 Sign Up
                             </button>
@@ -234,7 +235,8 @@ class SignUp extends React.Component {
 
 SignUp.propTypes = {
     positions: PropTypes.array,
-    fetchPositions: PropTypes.func.isRequired
+    fetchPositions: PropTypes.func.isRequired,
+    postUser: PropTypes.func.isRequired
 }
 
 SignUp.defaultProps = {

@@ -3,7 +3,7 @@ import React from 'react'
 const Requrements = () => 
 
     <section className="requrements" id="requrements">
-        <div className="container">
+        <div className="container no-pad">
             <div className="requrements__block">
                 <div className="row">
                     <div className="col">

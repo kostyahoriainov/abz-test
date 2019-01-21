@@ -8,11 +8,13 @@ import UsersContainer from '../containers/UsersContainer';
 import Footer from './footer';
 import SideMenuContainer from '../containers/SideMenuContainer'
 import SignUpContainer from '../containers/SignUpContainer';
+import Modal from './modal';
 
 class App extends React.Component {
 
   state = {
-    isMenu: false
+    isMenu: false,
+    isModal: false
   }
 
   toggleMenu = () => {
@@ -21,8 +23,15 @@ class App extends React.Component {
     }))
   }
 
+  toggleModal = () => {
+    this.setState(({isModal}) => ({
+      isModal: !isModal
+    }))
+  }
+
   render() {
     const sideMenu = this.state.isMenu && <SideMenuContainer toggleMenu={this.toggleMenu}/>
+    const modal = this.state.isModal && <Modal toggleModal={this.toggleModal}/>
     return (
       <>
       <HeaderContainer toggleMenu={this.toggleMenu}/>
@@ -37,11 +46,13 @@ class App extends React.Component {
   
       <UsersContainer />
   
-      <SignUpContainer />
+      <SignUpContainer  toggleModal={this.toggleModal}/>
   
       <Footer />
 
       { sideMenu }
+
+      { modal }
   
     </>
     )

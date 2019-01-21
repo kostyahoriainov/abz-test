@@ -1,23 +1,22 @@
 import React from 'react'
-import _sortBy from 'lodash/sortBy'
+import _orderBy from 'lodash/orderBy'
 import PropTypes from 'prop-types';
 import UserItem from './UserItem';
 
 class Users extends React.Component {
 
     componentDidMount( ) {
-        this.props.fetchUsers()
+        this.props.fetchInitialUsers()
     }
 
-    sortUsers = (users) => _sortBy(users, 'registration_timestamp', 'asc')
+    sortUsers = (users) => _orderBy(users, 'registration_timestamp', 'desc')
 
     render() {
         const { users } = this.props
-
         const sortedUsers = this.sortUsers(users.users)
         return (
             <section className="users" id="users">
-            <div className="container">
+            <div className="container no-pad">
                 <div className="users__block">
                     <div className="row">
                         <div className="col">
@@ -36,15 +35,13 @@ class Users extends React.Component {
                         
                         {
                             sortedUsers.map(user => <UserItem key={user.id} user={user}/> )
-                        }
-
-                        
+                        }                        
                         
                     </div>
     
                     <div className="row">
                         <div className="col">
-                            <div className={`users__button btn-secondary ${users.links.next_url ? '' : 'disabled'}`}>
+                            <div className={`users__button btn-secondary ${users.links.next_url ? '' : 'none'}`}>
                                 <button onClick={() =>  this.props.fetchUsers()}>
                                     Show more
                                 </button>
@@ -60,6 +57,7 @@ class Users extends React.Component {
 
 Users.propTypes = {
     users: PropTypes.object,
+    fetchInitialUsers: PropTypes.func.isRequired,
     fetchUsers: PropTypes.func.isRequired
 }
 

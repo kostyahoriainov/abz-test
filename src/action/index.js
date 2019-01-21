@@ -20,16 +20,34 @@ export function fetchHeaderUser () {
     }
 }
 
+export function fetchInitialUsers() {
+    return function(dispatch, getState) {
+        dispatch({
+            type: C.FETCH_INITIAL_USERS_REQUEST,
+            getToken: true
+        })
+        return axios.get('https://frontend-test-assignment-api.abz.agency/api/v1/users?page=1&count=6')
+            .then(({data}) => dispatch({
+                type: C.FETCH_INITIAL_USERS_SUCCESS,
+                payload: data
+            }))
+            .catch(err => dispatch({
+                type: C.FETCH_INITIAL_USERS_FAILURE,
+                payload: err.message
+            }))
+    }
+}
+
 export function fetchUsers() {
     return function(dispatch, getState) {
         dispatch({
             type: C.FETCH_USERS_REQUEST,
-            getToken: true
+
         })
-        return axios.get(getState().users.links.next_url || 'https://frontend-test-assignment-api.abz.agency/api/v1/users?page=1&count=6')
+        return axios.get(getState().users.links.next_url)
             .then(({data}) => dispatch({
                 type: C.FETCH_USERS_SUCCESS,
-                payload: data,
+                payload: data
             }))
             .catch(err => dispatch({
                 type: C.FETCH_USERS_FAILURE,
@@ -61,9 +79,10 @@ export function postUser (user) {
             type: C.POST_USER_REQUEST
         })
         const token = getState().users.token
-        axios.defaults.headers.common['Token'] = token;
+        axios.defaults.headers.common["Token"] = token;
         return axios.post('https://frontend-test-assignment-api.abz.agency/api/v1/users', user)
             .then(response => {
+                fetchInitialUsers();
                 console.log(response)
             })
             .catch(err => console.log(err))

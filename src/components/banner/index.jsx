@@ -4,7 +4,7 @@ import { Link } from 'react-scroll'
 const Banner = () => 
 
     <section className="banner" id="banner">
-        <div className="container">
+        <div className="container no-pad">
             <div className="banner__block row align-items-center">
                 <div className="col-lg-6 col-md-7">
                     <div className="banner__header">

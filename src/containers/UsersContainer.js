@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
-import { fetchUsers } from '../action';
+import { fetchUsers, fetchInitialUsers } from '../action';
 import User from '../components/users';
 
 const UsersContainer = connect(
     ({users}) => ({users}),
-    { fetchUsers }
+    { fetchUsers, fetchInitialUsers }
 )(User)
 
 export default UsersContainer

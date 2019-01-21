@@ -3,7 +3,7 @@ import React from 'react'
 const Relationships = () =>
 
     <section className="relationships" id="relationships">
-        <div className="container">
+        <div className="container no-pad">
             <div className="relationships__block">
                 <div className="row">
                     <div className="col">

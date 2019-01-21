@@ -3,7 +3,7 @@ import React from 'react'
 const Footer = () => 
 
     <section className="footer">
-        <div className="container">
+        <div className="container no-pad">
             <div className="footer__block">
                 <div className="row align-items-center justify-content-between footer__top">
                     <div className="col-md-auto  col-xs-12">
